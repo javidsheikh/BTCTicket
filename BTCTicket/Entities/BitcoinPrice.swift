@@ -12,7 +12,7 @@ struct BitcoinPrice: Decodable {
     let buy: Float
     let sell: Float
     let symbol: String
-    
+
     private enum CodingKeys: String, CodingKey {
         case fifteenMin = "15m"
         case last

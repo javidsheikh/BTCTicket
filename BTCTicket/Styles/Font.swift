@@ -10,7 +10,7 @@ import UIKit
 
 enum Font {
     case pricePound, pricePence
-    
+
     var attributes: [NSAttributedString.Key: Any] {
         switch self {
         case .pricePound:

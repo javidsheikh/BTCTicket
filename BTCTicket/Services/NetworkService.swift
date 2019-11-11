@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 struct NetworkService: NetworkingType {
-    
+
     private let session: URLSession
     private let urlString: Observable<String>
 

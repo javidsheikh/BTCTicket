@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 struct GBPToBitcoinViewModel {
-    
+
     private let networkingService: NetworkingType
     private let globalScheduler = ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global())
     private let bag = DisposeBag()
@@ -35,12 +35,12 @@ struct GBPToBitcoinViewModel {
             .subscribe()
             .disposed(by: bag)
     }
-    
+
     private func startPollingService() -> Observable<BitcoinPrice> {
         return networkingService.decode(type: GBPToBitcoin.self)
             .map { $0.GBP }
     }
-    
+
     private func postPriceToSubject(_ bitcoinPrice: BitcoinPrice) -> Observable<Void> {
         switch bitcoinPrice.sell {
         case let price where price > sellPriceRelay.value:
@@ -50,7 +50,7 @@ struct GBPToBitcoinViewModel {
         default:
             sellPriceChangeSubject.onNext(.noChange(String(bitcoinPrice.sell)))
         }
-        
+
         switch bitcoinPrice.buy {
         case let price where price > sellPriceRelay.value:
             buyPriceChangeSubject.onNext(.increase(String(price)))
@@ -59,7 +59,7 @@ struct GBPToBitcoinViewModel {
         default:
             buyPriceChangeSubject.onNext(.noChange(String(bitcoinPrice.buy)))
         }
-        
+
         sellPriceRelay.accept(bitcoinPrice.sell)
         buyPriceRelay.accept(bitcoinPrice.buy)
 
