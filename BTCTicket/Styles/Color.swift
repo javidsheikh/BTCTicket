@@ -10,10 +10,10 @@ import UIKit
 
 class Color: UIColor {
     override class var green: UIColor {
-        return UIColor(red: 67/255, green: 240/255, blue: 37/255, alpha: 1.0)
+        return UIColor(red: 0/255, green: 232/255, blue: 0/255, alpha: 1.0)
     }
     
     override class var red: UIColor {
-        return UIColor(red: 240/255, green: 8/255, blue: 7/255, alpha: 1.0)
+        return UIColor(red: 238/255, green: 0/255, blue: 0/255, alpha: 1.0)
     }
 }

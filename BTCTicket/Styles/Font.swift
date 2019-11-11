@@ -14,9 +14,9 @@ enum Font {
     var attributes: [NSAttributedString.Key: Any] {
         switch self {
         case .pricePound:
-            return [NSAttributedString.Key.font: UIFont(name: "PingFangHK-Regular", size: 32.0) as Any]
+            return [NSAttributedString.Key.font: UIFont(name: "PingFangHK-Medium", size: 32.0) as Any]
         case .pricePence:
-            return [NSAttributedString.Key.font: UIFont(name: "PingFangHK-Regular", size: 18.0) as Any]
+            return [NSAttributedString.Key.font: UIFont(name: "PingFangHK-Medium", size: 18.0) as Any]
         }
     }
 }

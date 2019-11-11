@@ -13,8 +13,10 @@ class GBPToBitcoinViewController: UIViewController {
     
     @IBOutlet weak var sellPriceLabel: UILabel!
     @IBOutlet weak var buyPriceLabel: UILabel!
+    @IBOutlet weak var spreadLabel: UILabel!
     @IBOutlet weak var unitsTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
+    @IBOutlet weak var confirmButton: UIButton!
     
     var viewModel: GBPToBitcoinViewModel!
     let bag = DisposeBag()
@@ -23,7 +25,7 @@ class GBPToBitcoinViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         unitsTextField.delegate = self
-        amountTextField.delegate = self
+        amountTextField.delegate = self        
     }
 }
 
@@ -98,7 +100,7 @@ extension GBPToBitcoinViewController: UITextFieldDelegate {
 }
 
 extension GBPToBitcoinViewController {
-    
+
     fileprivate func priceChangeToAttributedString(_ priceChange: PriceChange) -> Observable<NSAttributedString> {
         return Observable.create { [unowned self] observer in
 
