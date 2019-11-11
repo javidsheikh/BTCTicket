@@ -1,0 +1,6 @@
+framework module Pods_BTCTicket {
+  umbrella header "Pods-BTCTicket-umbrella.h"
+
+  export *
+  module * { export * }
+}
