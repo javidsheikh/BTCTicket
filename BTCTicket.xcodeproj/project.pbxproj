@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		4DD15D772374546D92C65924 /* Pods_BTCTicketTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04684235645CCCA1A06FAF32 /* Pods_BTCTicketTests.framework */; };
 		ED4CDBD3D7C8DD56D488DBF9 /* Pods_BTCTicket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAFD2D0C99C5D9C9088C906 /* Pods_BTCTicket.framework */; };
+		F956DEFC23799ADC0094B425 /* BTCTicketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956DEFB23799ADC0094B425 /* BTCTicketTests.swift */; };
 		F9C019DC2379941000D4B6C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C019DB2379941000D4B6C4 /* AppDelegate.swift */; };
 		F9C019DE2379941000D4B6C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C019DD2379941000D4B6C4 /* SceneDelegate.swift */; };
 		F9C019E02379941000D4B6C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C019DF2379941000D4B6C4 /* ViewController.swift */; };
 		F9C019E32379941000D4B6C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C019E12379941000D4B6C4 /* Main.storyboard */; };
 		F9C019E52379941100D4B6C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9C019E42379941100D4B6C4 /* Assets.xcassets */; };
 		F9C019E82379941100D4B6C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C019E62379941100D4B6C4 /* LaunchScreen.storyboard */; };
-		F9C019F32379941100D4B6C4 /* BTCTicketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C019F22379941100D4B6C4 /* BTCTicketTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +33,7 @@
 		10464173408B151C33D526A4 /* Pods-BTCTicket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTCTicket.release.xcconfig"; path = "Target Support Files/Pods-BTCTicket/Pods-BTCTicket.release.xcconfig"; sourceTree = "<group>"; };
 		D724C75DF2AF162D12B05D47 /* Pods-BTCTicketTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTCTicketTests.debug.xcconfig"; path = "Target Support Files/Pods-BTCTicketTests/Pods-BTCTicketTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E22DC425C380D742786A575F /* Pods-BTCTicket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTCTicket.debug.xcconfig"; path = "Target Support Files/Pods-BTCTicket/Pods-BTCTicket.debug.xcconfig"; sourceTree = "<group>"; };
+		F956DEFB23799ADC0094B425 /* BTCTicketTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTCTicketTests.swift; sourceTree = "<group>"; };
 		F9C019D82379941000D4B6C4 /* BTCTicket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BTCTicket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9C019DB2379941000D4B6C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9C019DD2379941000D4B6C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,7 +43,6 @@
 		F9C019E72379941100D4B6C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F9C019E92379941100D4B6C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9C019EE2379941100D4B6C4 /* BTCTicketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BTCTicketTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9C019F22379941100D4B6C4 /* BTCTicketTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCTicketTests.swift; sourceTree = "<group>"; };
 		F9C019F42379941100D4B6C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA8E5B7F6F7D5591CFF40BD8 /* Pods-BTCTicketTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BTCTicketTests.release.xcconfig"; path = "Target Support Files/Pods-BTCTicketTests/Pods-BTCTicketTests.release.xcconfig"; sourceTree = "<group>"; };
 		FAAFD2D0C99C5D9C9088C906 /* Pods_BTCTicket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BTCTicket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,7 +125,7 @@
 		F9C019F12379941100D4B6C4 /* BTCTicketTests */ = {
 			isa = PBXGroup;
 			children = (
-				F9C019F22379941100D4B6C4 /* BTCTicketTests.swift */,
+				F956DEFB23799ADC0094B425 /* BTCTicketTests.swift */,
 				F9C019F42379941100D4B6C4 /* Info.plist */,
 			);
 			path = BTCTicketTests;
@@ -327,7 +327,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9C019F32379941100D4B6C4 /* BTCTicketTests.swift in Sources */,
+				F956DEFC23799ADC0094B425 /* BTCTicketTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
