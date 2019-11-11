@@ -11,6 +11,11 @@ import RxSwift
 
 class GBPToBitcoinViewController: UIViewController {
     
+    @IBOutlet weak var sellPriceLabel: UILabel!
+    @IBOutlet weak var buyPriceLabel: UILabel!
+    @IBOutlet weak var unitsTextField: UITextField!
+    @IBOutlet weak var amountTextField: UITextField!
+    
     var viewModel: GBPToBitcoinViewModel!
     let bag = DisposeBag()
     
@@ -23,10 +28,14 @@ class GBPToBitcoinViewController: UIViewController {
 extension GBPToBitcoinViewController: BindableType {
     
     func bindViewModel() {
-        viewModel.bitcoinPriceSubject
-            .subscribe(onNext: {
-                print($0)
-            })
+        viewModel.sellPriceSubject
+            .observeOn(MainScheduler.instance)
+            .bind(to: sellPriceLabel.rx.text)
+            .disposed(by: bag)
+        
+        viewModel.buyPriceSubject
+            .observeOn(MainScheduler.instance)
+            .bind(to: buyPriceLabel.rx.text)
             .disposed(by: bag)
     }
 }
