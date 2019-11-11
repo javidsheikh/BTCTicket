@@ -17,7 +17,7 @@ struct GBPToBitcoinViewModel {
     private let bag = DisposeBag()
 
     var sellPriceRelay: BehaviorRelay<Float>!
-    private var buyPriceRelay: BehaviorRelay<Float>!
+    var buyPriceRelay: BehaviorRelay<Float>!
     var sellPriceChangeSubject: PublishSubject<(PriceChange)>!
     var buyPriceChangeSubject: PublishSubject<(PriceChange)>!
 

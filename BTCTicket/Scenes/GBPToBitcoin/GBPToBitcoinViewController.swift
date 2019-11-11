@@ -25,7 +25,7 @@ class GBPToBitcoinViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         unitsTextField.delegate = self
-        amountTextField.delegate = self        
+        amountTextField.delegate = self
     }
 }
 
@@ -42,6 +42,13 @@ extension GBPToBitcoinViewController: BindableType {
             .observeOn(MainScheduler.instance)
             .flatMap(priceChangeToAttributedString)
             .bind(to: buyPriceLabel.rx.attributedText)
+            .disposed(by: bag)
+        
+        _ = Observable.combineLatest(viewModel.buyPriceRelay.asObservable(), viewModel.sellPriceRelay.asObservable())
+            .observeOn(MainScheduler.instance)
+            .map { $0.0 - $0.1 }
+            .map { String($0) }
+            .bind(to: spreadLabel.rx.text)
             .disposed(by: bag)
         
         _ = Observable.combineLatest(amountTextField.rx.text.orEmpty, viewModel.sellPriceRelay.asObservable())
@@ -61,13 +68,21 @@ extension GBPToBitcoinViewController: BindableType {
             .disposed(by: bag)
         
         unitsTextField.rx.controlEvent(.editingChanged)
+            .observeOn(MainScheduler.instance)
             .flatMap(checkUnitsTextFieldContent)
             .subscribe()
             .disposed(by: bag)
         
         amountTextField.rx.controlEvent(.editingChanged)
+            .observeOn(MainScheduler.instance)
             .flatMap(checkAmountTextFieldContent)
             .subscribe()
+            .disposed(by: bag)
+        
+        _ = Observable.combineLatest(unitsTextField.rx.text.orEmpty, amountTextField.rx.text.orEmpty)
+            .observeOn(MainScheduler.instance)
+            .map { !($0.0.isEmpty && $0.1.isEmpty) }
+            .bind(to: confirmButton.rx.isEnabled)
             .disposed(by: bag)
     }
 }
