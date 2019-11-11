@@ -16,7 +16,7 @@ struct GBPToBitcoinViewModel {
     private let globalScheduler = ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global())
     private let bag = DisposeBag()
 
-    private var sellPriceRelay: BehaviorRelay<Float>!
+    var sellPriceRelay: BehaviorRelay<Float>!
     private var buyPriceRelay: BehaviorRelay<Float>!
     var sellPriceChangeSubject: PublishSubject<(PriceChange)>!
     var buyPriceChangeSubject: PublishSubject<(PriceChange)>!

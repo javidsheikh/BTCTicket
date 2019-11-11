@@ -41,6 +41,32 @@ extension GBPToBitcoinViewController: BindableType {
             .flatMap(priceChangeToAttributedString)
             .bind(to: buyPriceLabel.rx.attributedText)
             .disposed(by: bag)
+        
+        _ = Observable.combineLatest(amountTextField.rx.text.orEmpty, viewModel.sellPriceRelay.asObservable())
+            .observeOn(MainScheduler.instance)
+            .filter { !$0.0.isEmpty }
+            .flatMap(amountStringAndSellPriceToUnits)
+            .map { String($0) }
+            .bind(to: unitsTextField.rx.text)
+            .disposed(by: bag)
+        
+        _ = Observable.combineLatest(unitsTextField.rx.text.orEmpty, viewModel.sellPriceRelay.asObservable())
+            .observeOn(MainScheduler.instance)
+            .filter { !$0.0.isEmpty }
+            .flatMap(unitsStringAndSellPriceToAmount)
+            .map { String($0) }
+            .bind(to: amountTextField.rx.text)
+            .disposed(by: bag)
+        
+        unitsTextField.rx.controlEvent(.editingChanged)
+            .flatMap(checkUnitsTextFieldContent)
+            .subscribe()
+            .disposed(by: bag)
+        
+        amountTextField.rx.controlEvent(.editingChanged)
+            .flatMap(checkAmountTextFieldContent)
+            .subscribe()
+            .disposed(by: bag)
     }
 }
 
@@ -48,7 +74,7 @@ extension GBPToBitcoinViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var acceptedCharacterString = "0123456789"
-        if textField.tag == 1, let currentText = textField.text, !currentText.contains(".") {
+        if let currentText = textField.text, !currentText.contains(".") {
             acceptedCharacterString.append(".")
         }
         let acceptedCharacterSet = CharacterSet(charactersIn: acceptedCharacterString)
@@ -101,5 +127,37 @@ extension GBPToBitcoinViewController {
         }
         
         return priceAttrString
+    }
+    
+    fileprivate func amountStringAndSellPriceToUnits(_ tuple: (String, Float)) -> Observable<Float> {
+        return Observable.create { observer in
+            let amount = Float(tuple.0) ?? 0.0
+            let units = amount / tuple.1
+            observer.onNext(units)
+            return Disposables.create()
+        }
+    }
+    
+    fileprivate func unitsStringAndSellPriceToAmount(_ tuple: (String, Float)) -> Observable<Float> {
+        return Observable.create { observer in
+            let amount = Float(tuple.0) ?? 0.0
+            let units = round(amount * tuple.1 * 100) / 100
+            observer.onNext(units)
+            return Disposables.create()
+        }
+    }
+    
+    fileprivate func checkAmountTextFieldContent() -> Observable<Void> {
+        if let amountText = amountTextField.text, amountText.isEmpty {
+            unitsTextField.text = ""
+        }
+        return Observable.empty()
+    }
+    
+    fileprivate func checkUnitsTextFieldContent() -> Observable<Void> {
+        if let unitsText = unitsTextField.text, unitsText.isEmpty {
+            amountTextField.text = ""
+        }
+        return Observable.empty()
     }
 }
