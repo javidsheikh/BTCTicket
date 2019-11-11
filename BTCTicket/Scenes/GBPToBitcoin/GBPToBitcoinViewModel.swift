@@ -19,15 +19,18 @@ struct GBPToBitcoinViewModel {
     init(networkingService: NetworkingType) {
         self.networkingService = networkingService
         self.bitcoinPriceSubject = PublishSubject<BitcoinPrice>()
-        startPollingService()
-    }
-    
-    private func startPollingService() {
-        networkingService.decode(type: GBPToBitcoin.self)
-            .map { $0.GBP }
+        
+        _ = Observable<Int>.timer(0.0, period: 15.0, scheduler: globalScheduler)
+            .map { _ in }
+            .flatMap(startPollingService)
             .flatMap(postPriceToSubject)
             .subscribe()
             .disposed(by: bag)
+    }
+    
+    private func startPollingService() -> Observable<BitcoinPrice> {
+        return networkingService.decode(type: GBPToBitcoin.self)
+            .map { $0.GBP }
     }
     
     private func postPriceToSubject(_ bitcoinPrice: BitcoinPrice) -> Observable<Void> {
