@@ -22,6 +22,8 @@ class GBPToBitcoinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        unitsTextField.delegate = self
+        amountTextField.delegate = self
     }
 }
 
@@ -42,9 +44,36 @@ extension GBPToBitcoinViewController: BindableType {
     }
 }
 
+extension GBPToBitcoinViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        var acceptedCharacterString = "0123456789"
+        if textField.tag == 1, let currentText = textField.text, !currentText.contains(".") {
+            acceptedCharacterString.append(".")
+        }
+        let acceptedCharacterSet = CharacterSet(charactersIn: acceptedCharacterString)
+        let typedCharacterSet = CharacterSet(charactersIn: string)
+        
+        guard typedCharacterSet.isSubset(of: acceptedCharacterSet) else { return false }
+        
+        guard textField.tag == 1, let currentText = textField.text else { return true }
+        
+        let newText = currentText + string
+        let splitString = newText.split(separator: ".")
+        guard splitString.count > 1 else { return true }
+        guard splitString[1].count <= 2 else { return false }
+        
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
+    }
+}
+
 extension GBPToBitcoinViewController {
     
-    func priceChangeToAttributedString(_ priceChange: PriceChange) -> Observable<NSAttributedString> {
+    fileprivate func priceChangeToAttributedString(_ priceChange: PriceChange) -> Observable<NSAttributedString> {
         return Observable.create { [unowned self] observer in
 
             switch priceChange {
