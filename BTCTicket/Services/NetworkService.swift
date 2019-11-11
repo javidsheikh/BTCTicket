@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 struct NetworkService: NetworkingType {
+    
     private let session: URLSession
     private let urlString: Observable<String>
 
@@ -25,4 +26,8 @@ struct NetworkService: NetworkingType {
             return self.session.rx.decodable(request: request, type: D.self)
         }
     }
+}
+
+extension NetworkService {
+    static let blockchainTickerURLString = "https://www.blockchain.com/ticker"
 }
