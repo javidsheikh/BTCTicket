@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 struct GBPToBitcoinViewModel {
     
@@ -15,14 +16,18 @@ struct GBPToBitcoinViewModel {
     private let globalScheduler = ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global())
     private let bag = DisposeBag()
 
-    var sellPriceSubject: PublishSubject<String>!
-    var buyPriceSubject: PublishSubject<String>!
+    private var sellPriceRelay: BehaviorRelay<Float>!
+    private var buyPriceRelay: BehaviorRelay<Float>!
+    var sellPriceChangeSubject: PublishSubject<(PriceChange)>!
+    var buyPriceChangeSubject: PublishSubject<(PriceChange)>!
 
     init(networkingService: NetworkingType) {
         self.networkingService = networkingService
-        self.sellPriceSubject = PublishSubject<String>()
-        self.buyPriceSubject = PublishSubject<String>()
-        
+        self.sellPriceRelay = BehaviorRelay<Float>(value: 0.00)
+        self.buyPriceRelay = BehaviorRelay<Float>(value: 0.00)
+        self.sellPriceChangeSubject = PublishSubject<(PriceChange)>()
+        self.buyPriceChangeSubject = PublishSubject<(PriceChange)>()
+
         _ = Observable<Int>.timer(0.0, period: 15.0, scheduler: globalScheduler)
             .map { _ in }
             .flatMap(startPollingService)
@@ -37,8 +42,26 @@ struct GBPToBitcoinViewModel {
     }
     
     private func postPriceToSubject(_ bitcoinPrice: BitcoinPrice) -> Observable<Void> {
-        sellPriceSubject?.onNext(String(bitcoinPrice.sell))
-        buyPriceSubject?.onNext(String(bitcoinPrice.buy))
+        switch bitcoinPrice.sell {
+        case let price where price > sellPriceRelay.value:
+            sellPriceChangeSubject.onNext(.increase(String(price)))
+        case let price where price < sellPriceRelay.value:
+            sellPriceChangeSubject.onNext(.decrease(String(price)))
+        default:
+            sellPriceChangeSubject.onNext(.noChange(String(bitcoinPrice.sell)))
+        }
+        
+        switch bitcoinPrice.buy {
+        case let price where price > sellPriceRelay.value:
+            buyPriceChangeSubject.onNext(.increase(String(price)))
+        case let price where price < sellPriceRelay.value:
+            buyPriceChangeSubject.onNext(.decrease(String(price)))
+        default:
+            buyPriceChangeSubject.onNext(.noChange(String(bitcoinPrice.buy)))
+        }
+        
+        sellPriceRelay.accept(bitcoinPrice.sell)
+        buyPriceRelay.accept(bitcoinPrice.buy)
 
         return Observable.empty()
     }

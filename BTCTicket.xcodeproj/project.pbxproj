@@ -17,6 +17,8 @@
 		F956DF0A2379A96A0094B425 /* GBPToBitcoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956DF092379A96A0094B425 /* GBPToBitcoin.swift */; };
 		F956DF0D2379AED40094B425 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956DF0C2379AED40094B425 /* BindableType.swift */; };
 		F956DF102379AF700094B425 /* GBPToBitcoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956DF0F2379AF700094B425 /* GBPToBitcoinViewModel.swift */; };
+		F956DF162379D6650094B425 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956DF152379D6650094B425 /* Font.swift */; };
+		F956DF182379E5F20094B425 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956DF172379E5F20094B425 /* Color.swift */; };
 		F9C019DC2379941000D4B6C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C019DB2379941000D4B6C4 /* AppDelegate.swift */; };
 		F9C019DE2379941000D4B6C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C019DD2379941000D4B6C4 /* SceneDelegate.swift */; };
 		F9C019E02379941000D4B6C4 /* GBPToBitcoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C019DF2379941000D4B6C4 /* GBPToBitcoinViewController.swift */; };
@@ -48,6 +50,8 @@
 		F956DF092379A96A0094B425 /* GBPToBitcoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBPToBitcoin.swift; sourceTree = "<group>"; };
 		F956DF0C2379AED40094B425 /* BindableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindableType.swift; sourceTree = "<group>"; };
 		F956DF0F2379AF700094B425 /* GBPToBitcoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBPToBitcoinViewModel.swift; sourceTree = "<group>"; };
+		F956DF152379D6650094B425 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		F956DF172379E5F20094B425 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		F9C019D82379941000D4B6C4 /* BTCTicket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BTCTicket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9C019DB2379941000D4B6C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9C019DD2379941000D4B6C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +157,15 @@
 			path = GBPToBitcoin;
 			sourceTree = "<group>";
 		};
+		F956DF142379D6540094B425 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				F956DF152379D6650094B425 /* Font.swift */,
+				F956DF172379E5F20094B425 /* Color.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
 		F9C019CF2379941000D4B6C4 = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +189,7 @@
 		F9C019DA2379941000D4B6C4 /* BTCTicket */ = {
 			isa = PBXGroup;
 			children = (
+				F956DF142379D6540094B425 /* Styles */,
 				F956DF0B2379AE9B0094B425 /* Scenes */,
 				F956DF062379A6D20094B425 /* Entities */,
 				F956DF032379A62E0094B425 /* Extensions */,
@@ -386,10 +400,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F956DF162379D6650094B425 /* Font.swift in Sources */,
 				F956DF0A2379A96A0094B425 /* GBPToBitcoin.swift in Sources */,
 				F956DF0D2379AED40094B425 /* BindableType.swift in Sources */,
 				F956DF052379A64C0094B425 /* URLSession+Rx.swift in Sources */,
 				F956DF022379A5460094B425 /* NetworkService.swift in Sources */,
+				F956DF182379E5F20094B425 /* Color.swift in Sources */,
 				F956DF102379AF700094B425 /* GBPToBitcoinViewModel.swift in Sources */,
 				F9C019E02379941000D4B6C4 /* GBPToBitcoinViewController.swift in Sources */,
 				F956DF002379A3740094B425 /* NetworkingType.swift in Sources */,

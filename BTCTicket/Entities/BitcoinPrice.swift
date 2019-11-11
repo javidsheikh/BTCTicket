@@ -21,3 +21,7 @@ struct BitcoinPrice: Decodable {
         case symbol
     }
 }
+
+enum PriceChange {
+    case increase(String), decrease(String), noChange(String)
+}

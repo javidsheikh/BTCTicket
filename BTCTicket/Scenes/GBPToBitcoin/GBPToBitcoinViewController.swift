@@ -28,14 +28,49 @@ class GBPToBitcoinViewController: UIViewController {
 extension GBPToBitcoinViewController: BindableType {
     
     func bindViewModel() {
-        viewModel.sellPriceSubject
+        viewModel.sellPriceChangeSubject
             .observeOn(MainScheduler.instance)
-            .bind(to: sellPriceLabel.rx.text)
+            .flatMap(priceChangeToAttributedString)
+            .bind(to: sellPriceLabel.rx.attributedText)
             .disposed(by: bag)
         
-        viewModel.buyPriceSubject
+        viewModel.buyPriceChangeSubject
             .observeOn(MainScheduler.instance)
-            .bind(to: buyPriceLabel.rx.text)
+            .flatMap(priceChangeToAttributedString)
+            .bind(to: buyPriceLabel.rx.attributedText)
             .disposed(by: bag)
+    }
+}
+
+extension GBPToBitcoinViewController {
+    
+    func priceChangeToAttributedString(_ priceChange: PriceChange) -> Observable<NSAttributedString> {
+        return Observable.create { [unowned self] observer in
+
+            switch priceChange {
+            case .increase(let priceString):
+                observer.onNext(self.convertStringToAttributedString(priceString, withColor: .green))
+            case .decrease(let priceString):
+                observer.onNext(self.convertStringToAttributedString(priceString, withColor: .red))
+            case .noChange(let priceString):
+                observer.onNext(self.convertStringToAttributedString(priceString, withColor: .white))
+            }
+                    
+            return Disposables.create()
+        }
+    }
+    
+    private func convertStringToAttributedString(_ priceString: String, withColor colour: UIColor) -> NSAttributedString {
+        let splitPriceStringArray = priceString.split(separator: ".")
+        var attributes = Font.pricePound.attributes
+        attributes[NSAttributedString.Key.foregroundColor] = colour
+        let priceAttrString = NSMutableAttributedString(string: priceString, attributes: attributes)
+
+        if splitPriceStringArray.count > 1 {
+            let penceRange = NSString(string: priceString).range(of: String(splitPriceStringArray[1]))
+            priceAttrString.addAttributes(Font.pricePence.attributes, range: penceRange)
+        }
+        
+        return priceAttrString
     }
 }
