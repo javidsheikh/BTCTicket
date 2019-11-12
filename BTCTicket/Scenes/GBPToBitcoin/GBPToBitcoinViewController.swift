@@ -27,6 +27,9 @@ class GBPToBitcoinViewController: UIViewController {
         unitsTextField.delegate = self
         amountTextField.delegate = self
 
+        unitsTextField.addDoneToolbar()
+        amountTextField.addDoneToolbar()
+
         bindTextFieldsAndConfirmButton()
     }
 }
@@ -55,7 +58,7 @@ extension GBPToBitcoinViewController: BindableType {
             .observeOn(MainScheduler.instance)
             .filter { !$0.0.isEmpty }
             .flatMap(amountStringAndSellPriceToUnits)
-            .map { String($0) }
+            .map { String(format: "%.2f", $0) }
             .bind(to: unitsTextField.rx.text)
             .disposed(by: bag)
 
@@ -63,7 +66,7 @@ extension GBPToBitcoinViewController: BindableType {
             .observeOn(MainScheduler.instance)
             .filter { !$0.0.isEmpty }
             .flatMap(unitsStringAndSellPriceToAmount)
-            .map { String($0) }
+            .map { String(format: "%.2f", $0) }
             .bind(to: amountTextField.rx.text)
             .disposed(by: bag)
     }
@@ -187,7 +190,7 @@ extension GBPToBitcoinViewController {
     fileprivate func unitsStringAndSellPriceToAmount(_ tuple: (String, Float)) -> Observable<Float> {
         return Observable.create { observer in
             let amount = Float(tuple.0) ?? 0.0
-            let units = round(amount * tuple.1 * 100) / 100
+            let units = amount * tuple.1
             observer.onNext(units)
             return Disposables.create()
         }
