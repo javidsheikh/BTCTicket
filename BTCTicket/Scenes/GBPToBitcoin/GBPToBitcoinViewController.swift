@@ -46,14 +46,12 @@ extension GBPToBitcoinViewController: BindableType {
             .bind(to: buyPriceLabel.rx.attributedText)
             .disposed(by: bag)
 
-        _ = Observable.combineLatest(viewModel.buyPriceRelay.asObservable(), viewModel.sellPriceRelay.asObservable())
+        viewModel.spreadRelay.asObservable()
             .observeOn(MainScheduler.instance)
-            .map { $0.0 - $0.1 }
-            .map { String($0) }
             .bind(to: spreadLabel.rx.text)
             .disposed(by: bag)
 
-        _ = Observable.combineLatest(amountTextField.rx.text.orEmpty, viewModel.sellPriceRelay.asObservable())
+        _ = Observable.combineLatest(amountTextField.rx.text.orEmpty, viewModel.buyPriceRelay.asObservable())
             .observeOn(MainScheduler.instance)
             .filter { !$0.0.isEmpty }
             .flatMap(amountStringAndSellPriceToUnits)
@@ -61,7 +59,7 @@ extension GBPToBitcoinViewController: BindableType {
             .bind(to: unitsTextField.rx.text)
             .disposed(by: bag)
 
-        _ = Observable.combineLatest(unitsTextField.rx.text.orEmpty, viewModel.sellPriceRelay.asObservable())
+        _ = Observable.combineLatest(unitsTextField.rx.text.orEmpty, viewModel.buyPriceRelay.asObservable())
             .observeOn(MainScheduler.instance)
             .filter { !$0.0.isEmpty }
             .flatMap(unitsStringAndSellPriceToAmount)

@@ -19,6 +19,10 @@
 		F956DF102379AF700094B425 /* GBPToBitcoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956DF0F2379AF700094B425 /* GBPToBitcoinViewModel.swift */; };
 		F956DF162379D6650094B425 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956DF152379D6650094B425 /* Font.swift */; };
 		F956DF182379E5F20094B425 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956DF172379E5F20094B425 /* Color.swift */; };
+		F9B6FE20237A2595001951FF /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B6FE1F237A2595001951FF /* MockNetworkService.swift */; };
+		F9B6FE22237A25B9001951FF /* JSONFileDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B6FE21237A25B9001951FF /* JSONFileDecoder.swift */; };
+		F9B6FE24237A2603001951FF /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B6FE23237A2603001951FF /* Path.swift */; };
+		F9B6FE27237A263A001951FF /* GBPBTC.json in Resources */ = {isa = PBXBuildFile; fileRef = F9B6FE26237A263A001951FF /* GBPBTC.json */; };
 		F9C019DC2379941000D4B6C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C019DB2379941000D4B6C4 /* AppDelegate.swift */; };
 		F9C019DE2379941000D4B6C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C019DD2379941000D4B6C4 /* SceneDelegate.swift */; };
 		F9C019E02379941000D4B6C4 /* GBPToBitcoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C019DF2379941000D4B6C4 /* GBPToBitcoinViewController.swift */; };
@@ -52,6 +56,10 @@
 		F956DF0F2379AF700094B425 /* GBPToBitcoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBPToBitcoinViewModel.swift; sourceTree = "<group>"; };
 		F956DF152379D6650094B425 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		F956DF172379E5F20094B425 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		F9B6FE1F237A2595001951FF /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
+		F9B6FE21237A25B9001951FF /* JSONFileDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileDecoder.swift; sourceTree = "<group>"; };
+		F9B6FE23237A2603001951FF /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		F9B6FE26237A263A001951FF /* GBPBTC.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GBPBTC.json; sourceTree = "<group>"; };
 		F9C019D82379941000D4B6C4 /* BTCTicket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BTCTicket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9C019DB2379941000D4B6C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9C019DD2379941000D4B6C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				F956DF012379A5460094B425 /* NetworkService.swift */,
+				F9B6FE1F237A2595001951FF /* MockNetworkService.swift */,
+				F9B6FE21237A25B9001951FF /* JSONFileDecoder.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -119,6 +129,7 @@
 			children = (
 				F956DEFF2379A3740094B425 /* NetworkingType.swift */,
 				F956DF0C2379AED40094B425 /* BindableType.swift */,
+				F9B6FE23237A2603001951FF /* Path.swift */,
 			);
 			path = "Custom Types";
 			sourceTree = "<group>";
@@ -166,6 +177,14 @@
 			path = Styles;
 			sourceTree = "<group>";
 		};
+		F9B6FE25237A2621001951FF /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F9B6FE26237A263A001951FF /* GBPBTC.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		F9C019CF2379941000D4B6C4 = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +208,7 @@
 		F9C019DA2379941000D4B6C4 /* BTCTicket */ = {
 			isa = PBXGroup;
 			children = (
+				F9B6FE25237A2621001951FF /* Data */,
 				F956DF142379D6540094B425 /* Styles */,
 				F956DF0B2379AE9B0094B425 /* Scenes */,
 				F956DF062379A6D20094B425 /* Entities */,
@@ -301,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9C019E82379941100D4B6C4 /* LaunchScreen.storyboard in Resources */,
+				F9B6FE27237A263A001951FF /* GBPBTC.json in Resources */,
 				F9C019E52379941100D4B6C4 /* Assets.xcassets in Resources */,
 				F9C019E32379941000D4B6C4 /* Main.storyboard in Resources */,
 			);
@@ -425,11 +446,14 @@
 				F956DF052379A64C0094B425 /* URLSession+Rx.swift in Sources */,
 				F956DF022379A5460094B425 /* NetworkService.swift in Sources */,
 				F956DF182379E5F20094B425 /* Color.swift in Sources */,
+				F9B6FE22237A25B9001951FF /* JSONFileDecoder.swift in Sources */,
 				F956DF102379AF700094B425 /* GBPToBitcoinViewModel.swift in Sources */,
 				F9C019E02379941000D4B6C4 /* GBPToBitcoinViewController.swift in Sources */,
 				F956DF002379A3740094B425 /* NetworkingType.swift in Sources */,
 				F956DF082379A84B0094B425 /* BitcoinPrice.swift in Sources */,
 				F9C019DC2379941000D4B6C4 /* AppDelegate.swift in Sources */,
+				F9B6FE20237A2595001951FF /* MockNetworkService.swift in Sources */,
+				F9B6FE24237A2603001951FF /* Path.swift in Sources */,
 				F9C019DE2379941000D4B6C4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
