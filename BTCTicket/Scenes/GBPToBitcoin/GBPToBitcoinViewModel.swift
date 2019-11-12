@@ -46,11 +46,11 @@ struct GBPToBitcoinViewModel {
     private func postPriceToSubject(_ bitcoinPrice: BitcoinPrice) -> Observable<Void> {
         switch bitcoinPrice.sell {
         case let price where price > sellPriceRelay.value:
-            sellPriceChangeSubject.onNext(.increase(String(price)))
+            sellPriceChangeSubject.onNext(.increase(String(format: "%.2f", price)))
         case let price where price < sellPriceRelay.value:
-            sellPriceChangeSubject.onNext(.decrease(String(price)))
+            sellPriceChangeSubject.onNext(.decrease(String(format: "%.2f", price)))
         default:
-            sellPriceChangeSubject.onNext(.noChange(String(bitcoinPrice.sell)))
+            sellPriceChangeSubject.onNext(.noChange(String(format: "%.2f", bitcoinPrice.sell)))
         }
 
         switch bitcoinPrice.buy {
