@@ -49,7 +49,7 @@ extension GBPToBitcoinViewController: BindableType {
             .bind(to: buyPriceLabel.rx.attributedText)
             .disposed(by: bag)
 
-        viewModel.spreadRelay.asObservable()
+        viewModel.spreadSubject.asObservable()
             .observeOn(MainScheduler.instance)
             .bind(to: spreadLabel.rx.text)
             .disposed(by: bag)
@@ -57,7 +57,7 @@ extension GBPToBitcoinViewController: BindableType {
         _ = Observable.combineLatest(amountTextField.rx.text.orEmpty, viewModel.buyPriceRelay.asObservable())
             .observeOn(MainScheduler.instance)
             .filter { !$0.0.isEmpty }
-            .flatMap(amountStringAndSellPriceToUnits)
+            .flatMap(amountStringAndBuyPriceToUnits)
             .map { String(format: "%.2f", $0) }
             .bind(to: unitsTextField.rx.text)
             .disposed(by: bag)
@@ -65,7 +65,7 @@ extension GBPToBitcoinViewController: BindableType {
         _ = Observable.combineLatest(unitsTextField.rx.text.orEmpty, viewModel.buyPriceRelay.asObservable())
             .observeOn(MainScheduler.instance)
             .filter { !$0.0.isEmpty }
-            .flatMap(unitsStringAndSellPriceToAmount)
+            .flatMap(unitsStringAndBuyPriceToAmount)
             .map { String(format: "%.2f", $0) }
             .bind(to: amountTextField.rx.text)
             .disposed(by: bag)
@@ -178,7 +178,7 @@ extension GBPToBitcoinViewController {
         return priceAttrString
     }
 
-    fileprivate func amountStringAndSellPriceToUnits(_ tuple: (String, Float)) -> Observable<Float> {
+    fileprivate func amountStringAndBuyPriceToUnits(_ tuple: (String, Float)) -> Observable<Float> {
         return Observable.create { observer in
             let amount = Float(tuple.0) ?? 0.0
             let units = amount / tuple.1
@@ -187,7 +187,7 @@ extension GBPToBitcoinViewController {
         }
     }
 
-    fileprivate func unitsStringAndSellPriceToAmount(_ tuple: (String, Float)) -> Observable<Float> {
+    fileprivate func unitsStringAndBuyPriceToAmount(_ tuple: (String, Float)) -> Observable<Float> {
         return Observable.create { observer in
             let amount = Float(tuple.0) ?? 0.0
             let units = amount * tuple.1

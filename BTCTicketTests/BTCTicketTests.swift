@@ -55,7 +55,7 @@ class BTCTicketTests: QuickSpec {
 
             context("the Bitcoin prices update") {
                 it("the spread label should update accordingly") {
-                    viewModel.spreadRelay.asObservable()
+                    viewModel.spreadSubject.asObservable()
                         .subscribe(onNext: {
                             expect($0).to(equal("4.32"))
                         })

@@ -18,7 +18,7 @@ struct GBPToBitcoinViewModel {
 
     var sellPriceRelay: BehaviorRelay<Float>!
     var buyPriceRelay: BehaviorRelay<Float>!
-    var spreadRelay: BehaviorRelay<String>!
+    var spreadSubject: PublishSubject<String>!
     var sellPriceChangeSubject: PublishSubject<(PriceChange)>!
     var buyPriceChangeSubject: PublishSubject<(PriceChange)>!
 
@@ -26,7 +26,7 @@ struct GBPToBitcoinViewModel {
         self.networkingService = networkingService
         self.sellPriceRelay = BehaviorRelay<Float>(value: 0.00)
         self.buyPriceRelay = BehaviorRelay<Float>(value: 0.00)
-        self.spreadRelay = BehaviorRelay<String>(value: "")
+        self.spreadSubject = PublishSubject<String>()
         self.sellPriceChangeSubject = PublishSubject<(PriceChange)>()
         self.buyPriceChangeSubject = PublishSubject<(PriceChange)>()
 
@@ -67,7 +67,7 @@ struct GBPToBitcoinViewModel {
 
         let spread = round((bitcoinPrice.sell - bitcoinPrice.buy) * 100) / 100
         let spreadString = String(format: "%.2f", spread)
-        spreadRelay.accept(spreadString)
+        spreadSubject.onNext(spreadString)
 
         return Observable.empty()
     }
